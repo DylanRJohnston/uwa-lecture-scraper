@@ -1,24 +1,47 @@
-var request = require('request');
-var cheerio = require('cheerio');
-var db      = require('monk')('localhost/mydb');
+var async       = require('async');
+var fs          = require('fs');
+var request     = require('request');
+var cheerio     = require('cheerio');
+var ProgressBar = require('progress');
+//var db      = require('monk')('localhost/mydb');
 
 var url = 'http://echo360-test.its.uwa.edu.au/echocontent/sections/';
 
-request(url, function(error, response, html) {
-    if (error) return;
+request(
+    url,
+    function(error, response, body) {
+        var $ = cheerio.load(body);
+        var units = [];
+        var bar = new ProgressBar('Pulling [:bar] :current/:total :percent :eta', {total: $('td > a').length});
 
-    var $ = cheerio.load(html);
+        async.eachLimit(
+            $('td > a').toArray(),
+            1,
+            function(element, callback) {
+                request(
+                    url + element.attribs.href + 'section.xml',
+                    function(error, response, body){
+                        if (error) {
+                            console.log(error + " on " + element.attribs.href);
+                            bar.tick(1);
+                            callback(null);
+                            return;
+                        }
 
-    $('td > a').each(function(index, element) {
+                        var $ = cheerio.load(body, {xmlMode: true});
 
-        request(url + element.attribs.href + 'section.xml',
-            function(error, response, html){
+                        units.push({
+                            "name": $('course > name').text(),
+                            "identifier": $('course > identifier').text(),
+                            "term_ref" : $('term').attr('ref'),
+                        });
 
-                if (error) return;
-
-                var $ = cheerio.load(html);
-
-                console.log($('term > name').text());
-        });
-    });
-});
+                        bar.tick(1);
+                        callback(null);
+                    }
+                );
+            },
+            function(error){}
+        );
+    }
+);
