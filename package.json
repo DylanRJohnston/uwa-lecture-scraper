@@ -7,8 +7,6 @@
     "dependencies"  : {
             "request"   : "latest",
             "cheerio"   : "latest",
-            "mongodb"   : "latest",
-            "monk"      : "latest",
             "progress"  : "latest",
             "async"     : "latest"
     }
