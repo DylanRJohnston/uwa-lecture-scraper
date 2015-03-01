@@ -8,7 +8,9 @@
             "request"   : "latest",
             "cheerio"   : "latest",
             "mongodb"   : "latest",
-            "monk"      : "latest"
+            "monk"      : "latest",
+            "progress"  : "latest",
+            "async"     : "latest"
     }
 
 }
