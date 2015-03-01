@@ -5,8 +5,10 @@
     "main"          : "index.js",
     "author"        : "Dylan R. Johnston",
     "dependencies"  : {
-            "express"   : "latest",
             "request"   : "latest",
-            "cheerio"   : "latest"
+            "cheerio"   : "latest",
+            "mongodb"   : "latest",
+            "monk"      : "latest"
     }
+
 }
