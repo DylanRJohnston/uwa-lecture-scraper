@@ -1,0 +1,12 @@
+{
+    "name"          : "uwa-lecture-scraper",
+    "version"       : "0.0.1",
+    "description"   : "Scrapes lecture information / links from UWA lecture capture system.",
+    "main"          : "index.js",
+    "author"        : "Dylan R. Johnston",
+    "dependencies"  : {
+            "express"   : "latest",
+            "request"   : "latest",
+            "cheerio"   : "latest"
+    }
+}
