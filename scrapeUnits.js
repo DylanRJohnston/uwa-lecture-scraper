@@ -11,9 +11,13 @@ var fs          = require('fs');
 var request     = require('request');
 var cheerio     = require('cheerio');
 var ProgressBar = require('progress');
-//var db      = require('monk')('localhost/mydb');
+var db          = require('monk')('localhost/uwadb');
 
-var url = 'http://echo360-test.its.uwa.edu.au/echocontent/sections/';
+var url   = 'http://echo360-test.its.uwa.edu.au/echocontent/sections/';
+
+var units = db.get('units');
+units.index("unit_hash", { unique: true });
+units.index("identifier");
 
 request(
     url,
@@ -24,12 +28,11 @@ request(
         }
 
         var $ = cheerio.load(body);
-        var units = [];
         var bar = new ProgressBar('Pulling [:bar] :current/:total :percent :eta', {total: $('td > a').length});
 
         async.eachLimit(
             $('td > a').toArray(),
-            10,
+            200,
             function(element, callback) {
                 request(
                     url + element.attribs.href + 'section.xml',
@@ -43,18 +46,22 @@ request(
 
                         var $ = cheerio.load(body, {xmlMode: true});
 
-                        units.push({
+                        units.insert({
                             "name": $('course > name').text(),
                             "identifier": $('course > identifier').text(),
+                            "unit_hash": $('section').attr('id'),
                             "term_ref" : $('term').attr('ref'),
                         });
 
                         bar.tick(1);
-                        callack(null);
+                        callback(null);
                     }
                 );
             },
-            function(error){}
+            function(error){
+                if (error) console.log(error);
+                db.close();
+            }
         );
     }
 );
