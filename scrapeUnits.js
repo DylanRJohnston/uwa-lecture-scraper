@@ -57,12 +57,11 @@ request(
                             unit,
                             {upsert: true},
                             function(err, doc){
-                                if (err) console.log(err);
+                                if (err) console.log(err + "\nUpdating " + unit);
+                                bar.tick(1);
+                                callback(null);
                             }
                         );
-
-                        bar.tick(1);
-                        callback(null);
                     }
                 );
             },
