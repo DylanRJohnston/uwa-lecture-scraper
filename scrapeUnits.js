@@ -45,13 +45,21 @@ request(
                         }
 
                         var $ = cheerio.load(body, {xmlMode: true});
-
-                        units.insert({
-                            "name": $('course > name').text(),
+                        var unit = {
+                            "name": $('section > name').text(),
                             "identifier": $('course > identifier').text(),
                             "unit_hash": $('section').attr('id'),
                             "term_ref" : $('term').attr('ref'),
-                        });
+                        };
+
+                        units.update(
+                            { unit_hash : unit.unit_hash },
+                            unit,
+                            {upsert: true},
+                            function(err, doc){
+                                if (err) console.log(err);
+                            }
+                        );
 
                         bar.tick(1);
                         callback(null);
