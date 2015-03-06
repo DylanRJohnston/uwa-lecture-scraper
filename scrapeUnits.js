@@ -59,7 +59,7 @@ request(
                             function(err, doc){
                                 if (err) console.log(err + "\nUpdating " + unit);
                                 bar.tick(1);
-                                callback(null);
+                                callback(err);
                             }
                         );
                     }
