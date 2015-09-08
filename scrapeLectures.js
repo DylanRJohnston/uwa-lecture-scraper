@@ -13,7 +13,7 @@ var request     = require('request');
 var cheerio     = require('cheerio');
 var ProgressBar = require('progress');
 var URL         = require('url');
-var db          = require('monk')('localhost/uwadb');
+var db          = require('monk')(process.env.MONGOLAB_URI || 'localhost/uwadb');
 var units       = db.get('units');
 var lectures    = db.get('lectures');
 
