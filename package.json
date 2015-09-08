@@ -9,7 +9,8 @@
             "cheerio"   : "latest",
             "progress"  : "latest",
             "async"     : "latest",
-            "monk"      : "latest"
+            "monk"      : "latest",
+            "express"   : "latest"
     }
 
 }
