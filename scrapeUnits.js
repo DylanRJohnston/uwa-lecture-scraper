@@ -32,7 +32,7 @@ request(
 
         async.eachLimit(
             $('td > a').toArray(),
-            20,
+            100,
             function(element, callback) {
                 request(
                     url + element.attribs.href + 'section.xml',
