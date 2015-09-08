@@ -11,7 +11,7 @@ var fs          = require('fs');
 var request     = require('request');
 var cheerio     = require('cheerio');
 var ProgressBar = require('progress');
-var db          = require('monk')(process.env.MONGOLAB_URL || 'localhost/uwadb');
+var db          = require('monk')(process.env.MONGOLAB_URI || 'localhost/uwadb');
 
 var url   = 'http://echo360-test.its.uwa.edu.au/echocontent/sections/';
 
