@@ -10,7 +10,9 @@
             "progress"  : "latest",
             "async"     : "latest",
             "monk"      : "latest",
-            "express"   : "latest"
+            "express"   : "latest",
+            "moment"    : "latest"
+
     }
 
 }
