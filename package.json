@@ -1,18 +1,20 @@
 {
-    "name"          : "uwa-lecture-scraper",
-    "version"       : "0.0.1",
-    "description"   : "Scrapes lecture information / links from UWA lecture capture system.",
-    "main"          : "index.js",
-    "author"        : "Dylan R. Johnston",
-    "dependencies"  : {
-            "request"   : "latest",
-            "cheerio"   : "latest",
-            "progress"  : "latest",
-            "async"     : "latest",
-            "monk"      : "latest",
-            "express"   : "latest",
-            "moment"    : "latest"
-
-    }
-
+  "name": "uwa-lecture-scraper",
+  "version": "1.0.0",
+  "description": "Scrapes lectures from UWA so you can watch them offline",
+  "main": "index.ls",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cheerio": "^0.22.0",
+    "co": "^4.6.0",
+    "livescript": "^1.5.0",
+    "prelude-ls": "^1.1.2",
+    "progress": "^1.1.8",
+    "request": "^2.74.0",
+    "simple-rate-limiter": "^0.2.3"
+  }
 }
